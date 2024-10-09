@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { FaPlus } from "react-icons/fa";
+import { BsChevronDown } from "react-icons/bs";
+import { Tooltip } from 'react-tooltip'
+import { FaCheck } from "react-icons/fa";
 import '../index.css';
 
 // Popup Component
@@ -55,20 +59,14 @@ const Popup = () => {
   };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 max-w-sm mx-auto border border-gray-200 mt-10" style={{ width: "400px", height: "400px" }}>
-      <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">AutoFill Extension</h1>
+    <div className="bg-white shadow-xl rounded-lg p-8 max-w-sm mx-auto border border-gray-300 mt-12" style={{ width: "400px", height: "450px" }}>
+      <h1 className="text-3xl font-semibold mb-8 text-center text-gray-700">AutoFill Extension</h1>
 
-      <button
-        onClick={handleOpenDetailsPage}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full mb-4 transition duration-300 ease-in-out transform hover:scale-105"
-      >
-        Open Add Details Page
-      </button>
-
-      <div className="relative mb-6">
+      <div className="relative mb-8">
         <select
           onChange={(e) => setSelectedDetails(e.target.value)}
-          className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+          className="block appearance-none w-full bg-white border border-gray-300 hover:border-blue-400 px-4 py-3 pr-10 rounded-lg shadow-sm leading-tight focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+          data-tip="Select your personal details"
         >
           <option value="">-- Select Personal Details --</option>
           {details.map((detail, index) => (
@@ -77,24 +75,31 @@ const Popup = () => {
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 12l-6-6h12l-6 6z" /></svg>
+        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+          <BsChevronDown className="h-5 w-5" />
         </div>
       </div>
 
-      {/* <button
-        onClick={handleUseDetails}
-        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-full mb-4 transition duration-300 ease-in-out transform hover:scale-105"
+      <button
+        onClick={handleOpenDetailsPage}
+        className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-semibold py-3 px-5 rounded-lg w-full mb-6 flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300"
       >
-        Use Selected Details
-      </button> */}
+        <FaPlus className="inline-block mr-2" />
+        <span>Open Add Details Page</span>
+      </button>
+
 
       <button
-        onClick={handleFillFormDetails}
-        className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded w-full transition duration-300 ease-in-out transform hover:scale-105"
-      >
-        Autofill Details
-      </button>
+      onClick={handleFillFormDetails}
+      className="bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white font-semibold py-3 px-5 rounded-lg w-full flex items-center justify-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-orange-300"
+      data-tip="Click to autofill your details"
+    >
+      <FaCheck className="inline-block" /> {/* Adding an icon */}
+      <span>Autofill Details</span>
+    </button>
+      <Tooltip place="top" type="dark" effect="solid" />
+    
+
     </div>
   );
 };
